@@ -33,11 +33,6 @@ function($, cssContent) {'use strict';
                 settings : {
                     uses : "settings"
                 },
-				cluster: {
-					label: "Cluster",
-					type: "integer",
-					defaultValue: "3"
-				}
             }
         },
 		paint : function($element, layout) {
@@ -71,20 +66,39 @@ function($, cssContent) {'use strict';
                     $("#"+id).empty();
                 }
                 else{
-                    $element.append($('<canvas/>;').attr("id",id).width(width).height(height));
+                    $element.append($('<div/>;').attr("id",id).width(width).height(height));
                 }
-                viz(data,measureLabels,width,height,id);				
+                viz(data,measureLabels,width,height,id);
+				
+				//Cluster object id
+				var clusterId="cluster_container_"+layout.qInfo.qld;	
+				
+				// Check to see if the cluster element has already been created
+				if(document.getElementById(clusterId)){
+  				  $("#"+clusterId).empty();
+				}
+				else{
+ 				   $element.append($('<canvas/>;').attr("id",clusterId).width(width).height(height));
+				}
+				cluster(data, clusterId);
+				
 		}
 	};
 
 } );
+
+var cluster = function(data, id) {
+    var kmeans = new KMeans({canvas:document.getElementById(id), data:data, k:3});
+};
+
 var viz = function(data,labels,width,height,id) {
 
+/*
  	var clusterData = [ [6,5], [9,10], [10,1], [5,5], [7,7], [4,1], [10,7], [6,8], [10,2], [9,4], [2,5], [9,1], [10,9], [2,8], [1,1], [6,10], [3,8], [2,3], [7,9], [7,7], [3,6], [5,8], [7,5], [10,9], [10,9] ];
 
 	var kmeans = new KMeans({canvas:document.getElementById(id),data: clusterData, k:3});
 	return;
-	
+*/
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = width - margin.left - margin.right,
     height = height - margin.top - margin.bottom;
