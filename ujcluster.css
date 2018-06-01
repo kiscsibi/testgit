@@ -1,0 +1,12 @@
+.qv-object-scatter div.qv-object-content-container { 
+    font: 10px sans-serif;
+} 
+.qv-object-scatter .axis path, .qv-object-scatter .axis line{
+    fill:none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.qv-object-scatter .dot{
+    stroke: #000;
+}
